@@ -8,4 +8,4 @@ CREATE TABLE animals(
 );
 
 ALTER TABLE animals
-vet_clinic-# ADD COLUMN species VARCHAR(50);
+ADD COLUMN species VARCHAR(50);
