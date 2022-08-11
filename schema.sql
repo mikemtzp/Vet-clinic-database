@@ -1,7 +1,7 @@
 CREATE TABLE animals( 
 	id INT GENERATED ALWAYS AS IDENTITY,
 	name VARCHAR(50),
-	date_of_birth DATETIME,
+	date_of_birth DATE,
 	escape_attempts INT,
 	neutered BOOLEAN,
 	weight_kg DECIMAL
@@ -38,3 +38,25 @@ ON DELETE CASCADE;
 ALTER TABLE animals
 ADD FOREIGN KEY (owner_id) REFERENCES owners (id)
 ON DELETE CASCADE;
+
+CREATE TABLE vets (
+	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	name VARCHAR(50),
+	age INT,
+	date_of_graduation DATE
+);
+
+CREATE TABLE specializations (
+	vets_id INT,
+	species_id INT,
+	FOREIGN KEY (vets_id) REFERENCES vets (id) ON DELETE CASCADE,
+	FOREIGN KEY (species_id) REFERENCES species (id) ON DELETE CASCADE
+);
+
+CREATE TABLE visits (
+	vets_id INT,
+	animals_id INT,
+	date_of_visit DATE,
+	FOREIGN KEY (vets_id) REFERENCES vets (id) ON DELETE CASCADE,
+	FOREIGN KEY (animals_id) REFERENCES animals (id) ON DELETE CASCADE
+);
